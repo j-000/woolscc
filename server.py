@@ -9,16 +9,17 @@ from flask_marshmallow import Marshmallow
 
 
 load_dotenv(dotenv_path='.')
-HOST = 'http://127.0.0.1'
+HOST = os.getenv('HOST')
+
 
 app = Flask(__name__)
 CORS(app, resources={"/": {"origins": "*"}})
 
 
-if os.getenv('ENV') == 'production':
-    app.config.from_object(ProductionConfig)
-else:
+if os.getenv('ENV') == 'development':
     app.config.from_object(DevelopmentConfig)
+else:
+    app.config.from_object(ProductionConfig)
 
 api = Api(app)
 

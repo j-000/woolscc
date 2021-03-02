@@ -6,8 +6,8 @@ class Config(object):
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SESSION_COOKIE_DOMAIN = 'localhost.localdomain'
-    # SERVER_NAME = 'joservices'
-    SERVER_NAME = '127.0.0.1:5000'
+    SERVER_NAME = 'joservices'
+    # SERVER_NAME = '127.0.0.1:5000'
     SECRET_KEY = ''.join(choices(string.printable, k=50))
 
 

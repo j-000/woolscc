@@ -22,4 +22,9 @@ api = Api(app)
 
 db = SQLAlchemy(app=app)
 
+from models.URL import URL
+
+db.drop_all()
+db.create_all()
+
 ma = Marshmallow(app)

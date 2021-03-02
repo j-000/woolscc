@@ -12,8 +12,8 @@ Vue.use(IconsPlugin)
 Vue.config.productionTip = false
 
 
-// let host = 'http://127.0.0.1';
-let host = 'http://wools.cc';
+let host = 'http://127.0.0.1:5000';
+// let host = 'https://wools.cc';
 
 
 new Vue({

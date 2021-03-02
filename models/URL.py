@@ -1,4 +1,5 @@
-from server import db, HOST
+from server import db
+import os
 import datetime
 import random
 import string
@@ -14,9 +15,10 @@ class URL(db.Model):
     identifier = db.Column(db.String(30))
     active = db.Column(db.Boolean(), default=True)
     
-    def __init__(self, original_url, url_identifier_length=7):
+    def __init__(self, original_url, url_identifier_length=4):
         self.original_url = original_url
-        url_identifier = ''.join(random.choices(string.ascii_lowercase + string.digits + string.ascii_uppercase, k=url_identifier_length))
+        url_identifier = ''.join(random.choices(string.ascii_uppercase + string.digits, k=url_identifier_length))
+        HOST = os.getenv('HOST')
         self.follow_url = f'{HOST}/{url_identifier}'
         self.identifier = url_identifier
         db.session.add(self)

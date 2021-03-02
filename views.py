@@ -1,8 +1,10 @@
 from flask import request, redirect, jsonify
 from flask_restful import Resource
-from server import HOST
 from models.URL import URL
 from models.URL_serializer import URLSerializer
+import os
+
+HOST = os.getenv('HOST')
 
 
 class UrlShorter(Resource):

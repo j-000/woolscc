@@ -13,8 +13,8 @@ class Config(object):
 class ProductionConfig(Config):
     DEBUG = False
     ENV = 'production'
-    SERVER_NAME = '127.0.0.1' # will running in docker
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:root@127.0.0.1:3306/main'
+    SERVER_NAME = 'wools.cc'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///prod.db'
 
 
 class DevelopmentConfig(Config):

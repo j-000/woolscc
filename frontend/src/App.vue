@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <Home />
+    <Nav class="mb-5"/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Home from './components/Home'
+import Nav from './components/Navbar'
 
 export default {
   name: 'App',
   components: {
-    Home
+    Nav
   }
 }
 </script>
@@ -23,6 +24,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

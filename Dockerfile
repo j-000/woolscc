@@ -6,7 +6,7 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
-ENV FLASK_ENV='production'
+ENV ENV='production'
 
 EXPOSE 5000
 

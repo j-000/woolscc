@@ -14,12 +14,11 @@
         <div class="row mt-5">
           <div class="col">
             <p>That's Baaarbara, by the way, and she follows *anything*! If you ask me, I would say she's a sheep...</p>
-            <p>Links are valid for <strong>30 days</strong> and then they are turned into woolly jumpers... meh.</p>
+            <p>Links are valid for <strong>30 days</strong> and then they are turned into woolly jumpers... 🐑.</p>
           </div>
         </div>
       </div>
       <div class="col text-center">
-        <h1 id="title">wools.cc</h1>
         <div>
           <img v-if="ewe_image_1" width="500" src="../static/sheep_1.png" alt="wools ewe">
           <img v-else width="600" src="../static/sheep_2.png" alt="wools ewe">

@@ -13,18 +13,15 @@ CORS(app, resources={"/": {"origins": "*"}})
 
 load_dotenv()
 
-if os.getenv('ENV') == 'development':
+if os.getenv('ENV') == 'production':
+    app.config.from_object(ProductionConfig)
+elif os.getenv('ENV') == 'development':
     app.config.from_object(DevelopmentConfig)
 else:
-    app.config.from_object(ProductionConfig)
+    raise NotImplementedError('ENV Variable not set.')
 
 api = Api(app)
 
 db = SQLAlchemy(app=app)
-
-from models.URL import URL
-
-db.drop_all()
-db.create_all()
 
 ma = Marshmallow(app)

@@ -24,11 +24,10 @@ class UrlShorter(Resource):
       return jsonify(error='Missing "url" parameter.')        
     
     parsed_url = urlparse(url)
-    
     path = parsed_url.path if parsed_url.path else parsed_url.netloc
-    
+
     # Anything different to www.domain.gh or domain.gh is invalid
-    if parsed_url.path.count('.') < 1 or parsed_url.path.count('.') > 2:
+    if len(parsed_url.path.split('.')) < 1 or len(parsed_url.path.split('.')) > 3:
       return jsonify(error=f'Invalid url value "{url}".')
 
     if not parsed_url.scheme:

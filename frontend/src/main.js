@@ -12,6 +12,7 @@ Vue.config.productionTip = false
 Vue.config.devtools = true
 
 let host = 'https://wools.cc';
+// let host = 'http://127.0.0.1';
 
 
 new Vue({

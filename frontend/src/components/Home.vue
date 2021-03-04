@@ -3,26 +3,21 @@
     <div class="row ml-3 mr-3">
       <div class="col">
         <input  v-model="url" class="input_1" type="text" placeholder="URL to shorten">
-        <a  @click="getShortLink" href="javascript:void(0)" class="btn btn-lg btn-success mt-5">Get short link</a>
+        <button v-if="url" @click="getShortLink" href="javascript:void(0)" class="btn btn-lg btn-success mt-5">Get short link</button>
         <div v-if="link.follow_url" class="bg-light p-2 mt-5">
-          <h1 @click="copyTextToClipboard" id="url_h1">{{link.follow_url}}</h1>
+          <h1 id="url_h1">{{link.follow_url.substring(8)}}</h1>
           <h5 v-if="link" class="mt-4">Original: {{ link.original_url.substring(0, 30) }}</h5>
         </div>
+        <button v-if="link"  @click="copyTextToClipboard" class="mb-3 btn btn-lg btn-success mt-5">Copy link</button>
         <div v-else class="p-2 mt-5">
           <h1 id="url_h1">... meh ...</h1>
         </div>
-        <div class="row mt-5">
-          <div class="col">
-            <p>That's Baaarbara, by the way, and she follows *anything*! If you ask me, I would say she's a sheep...</p>
-            <p>Links are valid for <strong>30 days</strong> and then they are turned into woolly jumpers... 🐑.</p>
-          </div>
-        </div>
+        <p v-if="copied_msg" class="mb-3 bg-success text-white pl-2 pr-2">{{ copied_msg }}</p>
+        <p>That's Baaarbara, by the way, and she follows *anything*! If you ask me, I would say she's a sheep...</p>
+        <p>Links are valid for <strong>30 days</strong> and then they are turned into woolly jumpers... 🐑.</p>
       </div>
       <div class="col text-center">
-        <div>
-          <img v-if="ewe_image_1" width="500" src="../static/sheep_1.png" alt="wools ewe">
-          <img v-else width="600" src="../static/sheep_2.png" alt="wools ewe">
-        </div>
+        <img src="../static/sheep_1.png" alt="wools ewe">
       </div>
     </div>
   </div>
@@ -39,25 +34,26 @@ export default {
     return {
       url: '',
       link: false,
-      ewe_image_1: true
+      copied_msg: false
     }
   },
   methods:{
     getShortLink(){
-      this.ewe_image_1 = !this.ewe_image_1;
       if(this.url != ''){
         axios.get(`${host}?url=${this.url}`)
         .then((response) => {
-          console.log(response);
           this.url = '';
           this.link = response.data;
         })
-        .catch((error) => {alert(error)});
+        .catch((error) => {console.log(error)});
       }
     },
     copyTextToClipboard() {
-      navigator.clipboard.writeText(this.link.follow_url).then(function() {
-        console.log('Async: Copying to clipboard was successful!');
+      navigator.clipboard.writeText(this.link.follow_url).then(() => {
+        this.copied_msg = 'Link copied!';
+        setTimeout(() => {
+          this.copied_msg = '';
+        }, 2000);
       }, function(err) {
         console.error('Async: Could not copy text: ', err);
       });
@@ -67,17 +63,16 @@ export default {
 </script>
 
 <style>
+img{
+  max-width: 80%;
+  min-width: 300px;
+}
 html > body{
   background: rgba(255, 238, 0, 0.6);
 }
 h1#title{
   font-size: 55pt!important;
 }
-h1#url_h1{
-  cursor: pointer;
-
-}
-
 
 small{
   font-size: 10pt!important;
@@ -92,7 +87,7 @@ p{
   width: 100%;
   margin: auto;
 }
-.btn-success{
+.btn-lg{
   background-color: rgba(61, 71, 84, 1)!important;
 }
 

@@ -24,6 +24,9 @@ class UrlShorter(Resource):
       return jsonify(error='Missing "url" parameter.')        
     
     parsed_url = urlparse(url)
+
+    print(parsed_url)
+
     path = parsed_url.path if parsed_url.path else parsed_url.netloc
 
     # Anything different to www.domain.gh or domain.gh is invalid
@@ -31,9 +34,9 @@ class UrlShorter(Resource):
       return jsonify(error=f'Invalid url value "{url}".')
 
     if not parsed_url.scheme:
-      url = 'https://' + parsed_url.path
+      url = 'https://' + parsed_url.netloc + parsed_url.path + parsed_url.query
     else:
-      url = parsed_url.scheme + parsed_url.path
+      url = parsed_url.scheme + '://' + parsed_url.netloc + parsed_url.path + parsed_url.query
 
     exists = URL._exists(url)
     if exists:

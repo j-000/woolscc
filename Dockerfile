@@ -7,6 +7,7 @@ COPY . .
 RUN pip install -r requirements.txt
 
 ENV ENV='production'
+ENV HOST='https://wools.cc'
 
 EXPOSE 5000
 

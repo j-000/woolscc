@@ -25,6 +25,8 @@ class UrlShorter(Resource):
     
     parsed_url = urlparse(url)
     
+    path = parsed_url.path if parsed_url.path else parsed_url.netloc
+    
     # Anything different to www.domain.gh or domain.gh is invalid
     if parsed_url.path.count('.') < 1 or parsed_url.path.count('.') > 2:
       return jsonify(error=f'Invalid url value "{url}".')

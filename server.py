@@ -6,9 +6,17 @@ from flask_sqlalchemy import SQLAlchemy
 from config import ProductionConfig, DevelopmentConfig
 from flask_marshmallow import Marshmallow
 from dotenv import load_dotenv
-
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
+
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["100 per day"]
+)
+
 CORS(app, resources={"/": {"origins": "*"}})
 
 load_dotenv()

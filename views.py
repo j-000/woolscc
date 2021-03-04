@@ -3,6 +3,8 @@ from flask_restful import Resource
 from models.URL import URL
 from models.URL_serializer import URLSerializer
 import os
+from server import limiter
+from urllib.parse import urlparse
 
 
 HOST = os.getenv('HOST')
@@ -12,14 +14,29 @@ class UrlShorter(Resource):
   """
   GET /?url=<url>
   """
+
+  decorators = [limiter.limit('100 per day', methods=['GET'])]
+
   def get(self):
     url = request.args.get('url')
+
     if not url:
-      return jsonify(error='Missing "url" parameter.')      
+      return jsonify(error='Missing "url" parameter.')        
+    
+    parsed_url = urlparse(url)
+    
+    # Anything different to www.domain.gh or domain.gh is invalid
+    if parsed_url.path.count('.') < 1 or parsed_url.path.count('.') > 2:
+      return jsonify(error=f'Invalid url value "{url}".')
+
+    if not parsed_url.scheme:
+      url = 'https://' + parsed_url.path
+    else:
+      url = parsed_url.scheme + parsed_url.path
 
     exists = URL._exists(url)
     if exists:
-      return jsonify(URLSerializer().dump(exists))      
+      return jsonify(URLSerializer().dump(exists)) 
 
     new_url = URL(original_url=url)
     return jsonify(URLSerializer().dump(new_url))

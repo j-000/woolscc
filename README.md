@@ -34,7 +34,7 @@ GET /?url=https://example.com
     id: 3,
     active: true,
     identifier: "BMRYD",
-    original_url: "https://www.sapo.pt",
+    original_url: "https://example.com",
     follow_url: "https://wools.cc/BMRYD",
     timestamp: "2021-03-04T12:52:19.977104",
 }

@@ -22,6 +22,27 @@ Server is an EC2 t2.medium instance.
 
 It's a pretty simple application but it certainly helped me learn and consolidate some of my current skills.
 
+# API
+
+There is also an API available.
+
+```
+
+GET /?url=https://example.com
+
+{
+    id: 3,
+    active: true,
+    identifier: "BMRYD",
+    original_url: "https://www.sapo.pt",
+    follow_url: "https://wools.cc/BMRYD",
+    timestamp: "2021-03-04T12:52:19.977104",
+}
+
+```
+
+The API is throtled using Flask-Limiter to ensure it isn't abused by sheep-bots.
+
 # Employers
 
 [My CV is on Indeed](https://my.indeed.com/p/jooo-2fu0s8b). Contact info available.

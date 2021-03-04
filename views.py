@@ -36,7 +36,7 @@ class UrlShorter(Resource):
     if not parsed_url.scheme:
       url = 'https://' + parsed_url.netloc + parsed_url.path + parsed_url.query
     else:
-      url = parsed_url.scheme + '://' + parsed_url.netloc + parsed_url.path + parsed_url.query
+      url = parsed_url.scheme + '://' + parsed_url.netloc + parsed_url.path + '?'+ parsed_url.query
 
     exists = URL._exists(url)
     if exists:

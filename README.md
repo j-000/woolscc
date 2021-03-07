@@ -1,4 +1,4 @@
-# wools.cc - URL shorter
+# wools - URL shorter
 
 <p align="center">
     <img src="https://github.com/j-000/woolscc/blob/master/github_images/w1.PNG" />

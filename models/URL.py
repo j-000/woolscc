@@ -3,20 +3,32 @@ import os
 import datetime
 import random
 import string
+from sqlalchemy import  (
+    Table, 
+    Column, 
+    Integer, 
+    String, 
+    DateTime, 
+    Boolean
+)
+from sqlalchemy.ext.declarative import declarative_base
 
 
+Base = declarative_base()
 HOST = os.getenv('HOST')
 
 
-class URL(db.Model):
+class URL(Base):
     __tablename__ = 'urls'
 
-    id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(db.DateTime(), default=datetime.datetime.utcnow)
-    original_url = db.Column(db.String(200), nullable=False)
-    follow_url = db.Column(db.String(200))
-    identifier = db.Column(db.String(30))
-    active = db.Column(db.Boolean(), default=True)
+    query = db.query_property()
+
+    id = Column(Integer, primary_key=True)
+    timestamp = Column(DateTime(), default=datetime.datetime.utcnow)
+    original_url = Column(String(200), nullable=False)
+    follow_url = Column(String(200))
+    identifier = Column(String(30))
+    active = Column(Boolean(), default=True)
     
     def __init__(self, original_url, url_identifier_length=4):
         self.original_url = original_url
@@ -30,8 +42,9 @@ class URL(db.Model):
         
         self.follow_url = f'{HOST}/{url_identifier}'
         self.identifier = url_identifier
-        db.session.add(self)
-        db.session.commit()
+
+        db.add(self)
+        db.commit()
 
     @staticmethod
     def _exists(url):

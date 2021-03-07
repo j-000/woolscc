@@ -25,8 +25,6 @@ class UrlShorter(Resource):
     
     parsed_url = urlparse(url)
 
-    print(parsed_url)
-
     path = parsed_url.path if parsed_url.path else parsed_url.netloc
 
     # Anything different to www.domain.gh or domain.gh is invalid

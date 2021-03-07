@@ -2,7 +2,12 @@ import os
 from flask import Flask, request, redirect, url_for
 from flask_cors import CORS
 from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
+
+from sqlalchemy import create_engine
+
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import scoped_session, sessionmaker
+
 from config import ProductionConfig, DevelopmentConfig
 from flask_marshmallow import Marshmallow
 from dotenv import load_dotenv
@@ -30,6 +35,14 @@ else:
 
 api = Api(app)
 
-db = SQLAlchemy(app=app)
+# TODO: put sqlite uri in an env var
+
+engine = create_engine('sqlite:///data.db', convert_unicode=True,
+connect_args={'check_same_thread': False})
+db = scoped_session(
+    sessionmaker(autocommit=False, autoflush=False, bind=engine)
+)
+
+# May stop working...
 
 ma = Marshmallow(app)

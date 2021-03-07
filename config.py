@@ -13,7 +13,7 @@ class Config(object):
 class ProductionConfig(Config):
     DEBUG = False
     ENV = 'production'
-    SERVER_NAME = 'wools.cc'
+    SERVER_NAME = 'wools.joalex.dev'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///prod.db'
 
 

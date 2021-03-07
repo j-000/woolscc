@@ -4,7 +4,7 @@
     <img src="https://github.com/j-000/woolscc/blob/master/github_images/w1.PNG" />
 </p>
 
-wools.cc is a URL shorter. Easy to use and free! Get over to [wools.joalex.dev](https://wools.joalex.dev) and meet Baaarbara.
+wools is a URL shorter. Easy to use and free! Get over to [wools.joalex.dev](https://wools.joalex.dev) and meet Baaarbara.
 
 # Tech details
 

@@ -5,7 +5,7 @@
         <input  v-model="url" class="input_1" type="text" placeholder="URL to shorten">
         <button v-if="url" @click="getShortLink" href="javascript:void(0)" class="btn btn-lg btn-success mt-5">Get short link</button>
         <div v-if="link.follow_url" class="bg-light p-2 mt-5">
-          <h1 id="url_h1">{{link.follow_url.substring(8)}}</h1>
+          <h1 id="url_h1">{{link.follow_url}}</h1>
           <h5 v-if="link" class="mt-4">Original: {{ link.original_url.substring(0, 30) }}</h5>
         </div>
         <button v-if="link"  @click="copyTextToClipboard" class="mb-3 btn btn-lg btn-success mt-5">Copy link</button>
